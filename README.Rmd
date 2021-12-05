@@ -1,0 +1,44 @@
+---
+title: "GGPlot Throwback"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(dplyr)
+library(gapminder)
+```
+
+## Back to PS02
+
+*Context: One of our first problem sets had us recreate a plot from ModernDive, a scatterplot that included details for continent, GDP per capita, and life expectancy. This uses the gapminder package.*
+
+### Summary
+
+The following shows some of the summary statistics for the variables included in the scatterplot.
+
+```{r}
+gapminder_2007 <- gapminder %>% 
+  filter(year == 2007)
+summary(gapminder_2007)
+```
+
+### The Scatterplot
+
+This was the plot created for PS02, **with some labels added**:
+
+```{r pressure, echo=FALSE}
+ggplot(gapminder_2007, aes(x = gdpPercap, y = lifeExp, size = pop, color = continent)) +
+  geom_point() +
+  labs(title = "Life Expectancy by GDP Per Capita", 
+       x = "GDP per capita", 
+       y = "Life Expectancy")
+#plot(pressure)
+```
+
+### Analysis:
+
+It appears as if many of the countries with both a relatively low GDP per capita and life expectancy are in Africa, while many of those with the highest life expectancies and GDP are from Europe, Oceania, Asia, and the Americas. This makes sense as many countries in Africa have been *deeply* harmed by colonization by mainly European countries who have profited off of this exploitation and violence. 
+
+Interestingly, there appears to be a sharp increase in life expectancy while GDP increases up to around **10,000**. It continues to increase somewhat with GDP, and there is clearly a positive relationship present, but it does level out somewhat once GDP meets this threshold. This implies that GDP does matter in increasing a country's life expectancy, but once GDP meets a certain point, there are **diminishing returns** in its effects on life expectancy. It would be interesting to look at how *quality of life* continues to improve, as this is immensely important but not necessarily directly related to life expectancy (and also far more difficult to quantify). I would expect to see continually increasing quality of life as GDP increases.
